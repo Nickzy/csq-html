@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script></script>
+  <title>Document</title>
+</head>
+<style>
+  body, p, h1, h2, h3, h4, h5, h6, ul, ol, li ,dl, dt, dl {margin: 0; padding:0};
+  a {color: inherit; text-decoration:none;};
+  ul,ol {list-style: none;};
+  img {vertical-align:top; border: 0;};
+  em,i {font-style:normal;};
+  strong, b {font-weight: normal;};
+  body {
+    font-family: 'Times New Roman';
+  }
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .item-wrap {
+    width: 280px;
+    padding: 20px;
+    margin: 0 5px;
+    margin-bottom: 10px;
+    border: 0.5px solid rgb(168, 168, 168);
+  }
+  .item-wrap img {
+    width: 100%;
+  }
+  .item-wrap:hover {
+    box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);  
+    -webkit-box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);  
+    -moz-box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);
+  }
+  .item-wrap p {
+    color: rgba(27, 26, 26, 0.466);
+  }
+  .item-active {
+    border: 2px solid rgb(230, 79, 79);
+    box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);  
+    -webkit-box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);  
+    -moz-box-shadow: 0 2px 18px 0 rgb(0 0 0 / 30%);
+  }
+  .title {
+    padding: 20px 30px;
+  }
+</style>
+<body>
+  <div id="app">
+    <div class="title">
+      <h2>泰勒·斯威夫特（Taylor Swift）</h2>
+    </div>
+    <div class="content"></div>
+  </div>
+  <script type="module">
+    // const one = require('./images/1.png')
+    // import one from './images/1.png'
+    window.onload = function () {
+      // console.log(one)
+      const imgData = [
+        {
+          src: './images/1.png',
+          text: '泰勒·斯威夫特（Taylor Swift），1989年12月13日出生于美国宾夕法尼亚州，美国女歌手、词曲作者、音乐制作人、演员。'
+        },
+        {
+          src: './images/2.png',
+          text: '2006年，发行个人首张音乐专辑《Taylor Swift》，该专辑获得美国唱片业协会认证5倍白金唱片销量。'
+        },
+        {
+          src: './images/3.png',
+          text: '2008年，发行音乐专辑《Fearless》，该专辑在美国公告牌专辑榜上获11周冠军，认证7倍白金唱片销量，并获得第52届格莱美奖年度专辑奖'
+        },
+        {
+          src: './images/4.png',
+          text: '2010年，发行音乐专辑《Speak Now》，单曲《Mean》获2座格莱美奖。'
+        },
+        {
+          src: './images/5.png',
+          text: '同年，获创作人名人堂“哈尔·大卫星光大奖”。2011年，凭借三张实体专辑销量，获得中国区“五白金唱片”销量认证'
+        },
+        {
+          src: './images/6.png',
+          text: '2012年，开始向流行乐歌手转型，并发行音乐专辑《Red》[4]，该专辑实体版本获得中国区“双白金唱片”销量认证。2013年，获得第47届乡村音乐协会奖巅峰奖'
+        },
+        {
+          src: './images/7.png',
+          text: '2014年，发行音乐专辑《1989》，该专辑获得第58届格莱美奖年度专辑奖，国际唱片业协会（IFPI）宣布该专辑为“年度全球唱片销量冠军”。同年，获得第42届全美音乐奖迪克·克拉克成就奖，并入围《时代周刊（美国版）》年度人物。'
+        },
+        {
+          src: './images/8.png',
+          text: '2015年4月，获第50届乡村音乐学院奖50周年里程碑奖。'
+        },
+        {
+          src: './images/9.png',
+          text: '2017年，发行音乐专辑《reputation》，凭借美国首周123.8万张销量，成为拥有四张首周百万销量专辑的歌手。同年，被《时代周刊》选为年度人物。'
+        },
+        {
+          src: './images/10.png',
+          text: '2019年，发行音乐专辑《Lover》；同年，获得国际唱片业协会（IFPI）“年度全球最佳唱片艺术家奖”。2020年，发行音乐专辑《folklore》《evermore》，前者获第63届格莱美奖年度专辑奖。'
+        }
+      ]
+
+      const eleArray = imgData.map(item => {
+        return getItemEles(item)
+      })
+      function getItemEles (data) {
+        const img = `<img src=${data.src} alt='' />`
+        const content = `<p>${data.text}</p>`
+        return `<div class="item-wrap">
+            ${img}
+            ${content}
+          </div>`
+      }
+      let content = document.querySelector('.content')
+      if (content) {
+        content.innerHTML = eleArray.join(' ')
+      }
+      let childList = Array.from(content.children)
+      // console.log('childList', childList)
+      content.onclick = function (e) {
+        // console.log(e.target)
+        childList.forEach(item => { 
+          if (e.target !== content) {
+            item.className = 'item-wrap'
+            if (e.target.className === 'item-wrap') {
+              item.className = 'item-wrap item-active'
+            }
+            if (isDescendant(e.target, item)) {
+              item.className = 'item-wrap item-active'
+            }
+          }
+        })
+      }
+      const isDescendant = (el, parentNode) => {
+        let isChild = false
+
+        if (el === parentNode) { //判断是否是其本身
+          isChild = true
+        }
+
+        while (el = el.parentNode) {
+          if (el === parentNode) {
+            isChild = true
+          }
+        }
+        
+        return isChild
+      }
+    }
+  </script>
+</body>
+</html>
